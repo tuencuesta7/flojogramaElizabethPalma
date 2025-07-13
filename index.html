@@ -74,6 +74,11 @@
       background-color: #f8bbd0;
     }
 
+    .course.workshop {
+      background-color: #fff9c4;
+      font-style: italic;
+    }
+
     #unlocked-message {
       position: fixed;
       bottom: 20px;
@@ -104,120 +109,23 @@
 
   <script>
     const semesters = [
-      {
-        name: "1° PERÍODO",
-        color: "#f48fb1",
-        courses: [
-          "FPP1002 Pedagogía",
-          "FFE0301 Español",
-          "LIN0301 Inglés Básico",
-          "FFM1301 Matemática"
-        ]
-      },
-      {
-        name: "2° PERÍODO",
-        color: "#ce93d8",
-        courses: [
-          "FPA1902 Psicología del Aprendizaje",
-          "FPC1702 Taller de Comunicación Educativa",
-          "LIN0702 Inglés I"
-        ]
-      },
-      {
-        name: "3° PERÍODO",
-        color: "#81d4fa",
-        courses: [
-          "FFF1601 Filosofía",
-          "FFH1801 Historia de Honduras",
-          "LIN1103 Inglés II"
-        ]
-      },
-      {
-        name: "4° PERÍODO",
-        color: "#a5d6a7",
-        courses: [
-          "FPF2002 Filosofía Educativa",
-          "FPG2102 Gestión Educativa",
-          "LIN1504 Inglés III",
-          "LIN1604 Taller de Gramática del Inglés"
-        ]
-      },
-      {
-        name: "5° PERÍODO",
-        color: "#ffab91",
-        courses: [
-          "FD12105 Diseño y Desarrollo Curricular en Inglés",
-          "LIN1805 Fundamentos de Educación Pre-básica y Básica",
-          "LIN1905 Inglés IV",
-          "LIN2005 Taller de Lectura y Escritura"
-        ]
-      },
-      {
-        name: "6° PERÍODO",
-        color: "#ffcc80",
-        courses: [
-          "FF31501 Sociología",
-          "FPM2302 Metodología de Investigación Cuantitativa",
-          "LIN2206 Introducción al Estudio Literario",
-          "LIN2506 Taller de Oratoria y Conversación"
-        ]
-      },
-      {
-        name: "7° PERÍODO",
-        color: "#e6ee9c",
-        courses: [
-          "FD13107 Didáctica del Inglés",
-          "FD13207 Evaluación de los Aprendizajes en Inglés",
-          "LIN2807 Fundamentos de Lingüística Aplicada",
-          "LIN2907 Literatura Universal"
-        ]
-      },
-      {
-        name: "8° PERÍODO",
-        color: "#c5e1a5",
-        courses: [
-          "FPM2402.14 Metodología de Investigación Cualitativa",
-          "LIN3108 Teorías y Métodos de TESOL",
-          "LIN3208 Morfosintaxis del Inglés"
-        ]
-      },
-      {
-        name: "9° PERÍODO",
-        color: "#b2dfdb",
-        courses: [
-          "LIN3609 Fonética y Fonología del Inglés",
-          "LIN3809 Taller de Investigación en TESOL",
-          "LIN3909 Didáctica de la Comprensión y Expresión Oral",
-          "LIN4009 Didáctica de la Comprensión y Expresión Escrita"
-        ]
-      },
-      {
-        name: "10° PERÍODO",
-        color: "#80cbc4",
-        courses: [
-          "LIM4100 Didáctica de la Gramática",
-          "LIN4200 Sociolingüística",
-          "LIN4300 Psicolingüística"
-        ]
-      },
-      {
-        name: "11° PERÍODO",
-        color: "#9fa8da",
-        courses: [
-          "LIN4501 Inglés para Propósitos Específicos"
-        ]
-      },
-      {
-        name: "12° PERÍODO",
-        color: "#ce93d8",
-        courses: [
-          "PP14802 Seminario de Desarrollo Profesional"
-        ]
-      }
+      { name: "1° PERÍODO", color: "#f48fb1", courses: ["FFE0301 Español", "LIN0301 Inglés Básico", "FPP1002 Pedagogía"] },
+      { name: "2° PERÍODO", color: "#ce93d8", courses: ["LIN0702 Inglés I", "FPA1902 Psicología del Aprendizaje", "FPC1702 Taller de Comunicación Educativa", "FFM1301 Matemática"] },
+      { name: "3° PERÍODO", color: "#81d4fa", courses: ["FFF1601 Filosofía", "FFH1801 Historia de Honduras", "LIN1103 Inglés II", "EAC-XXX Electiva de Arte y Comunicación"] },
+      { name: "4° PERÍODO", color: "#a5d6a7", courses: ["FPF2002 Filosofía Educativa", "FPG2102 Gestión Educativa", "LIN1504 Inglés III", "LIN1604 Taller de Gramática del Inglés"] },
+      { name: "5° PERÍODO", color: "#ffab91", courses: ["FD12105 Diseño y Desarrollo Curricular en Inglés", "LIN1805 Fundamentos de Educación Pre-básica y Básica", "LIN1905 Inglés IV", "LIN2005 Taller de Lectura y Escritura"] },
+      { name: "6° PERÍODO", color: "#ffcc80", courses: ["FF31501 Sociología", "FPM2302 Metodología de Investigación Cuantitativa", "LIN2206 Introducción al Estudio Literario", "LIN2506 Taller de Oratoria y Conversación"] },
+      { name: "7° PERÍODO", color: "#e6ee9c", courses: ["FD13107 Didáctica del Inglés", "FD13207 Evaluación de los Aprendizajes en Inglés", "LIN2807 Fundamentos de Lingüística Aplicada", "LIN2907 Literatura Universal", "EEH-XXX Electiva de Entorno Humano"] },
+      { name: "8° PERÍODO", color: "#c5e1a5", courses: ["FPM2402.14 Metodología de Investigación Cualitativa", "LIN3108 Teorías y Métodos de TESOL", "LIN3208 Morfosintaxis del Inglés"] },
+      { name: "9° PERÍODO", color: "#b2dfdb", courses: ["LIN3609 Fonética y Fonología del Inglés", "LIN3809 Taller de Investigación en TESOL", "LIN3909 Didáctica de la Comprensión y Expresión Oral", "LIN4009 Didáctica de la Comprensión y Expresión Escrita"] },
+      { name: "10° PERÍODO", color: "#80cbc4", courses: ["LIM4100 Didáctica de la Gramática", "LIN4200 Sociolingüística", "LIN4300 Psicolingüística"] },
+      { name: "11° PERÍODO", color: "#9fa8da", courses: ["LIN4501 Inglés para Propósitos Específicos", "ECN-XXX Electiva de Ciencias Naturales"] },
+      { name: "12° PERÍODO", color: "#ce93d8", courses: ["PPI4601 Práctica Profesional II en Inglés", "PPI4802 Seminario de Desarrollo Profesional"] }
     ];
 
     const prerequisites = {
       "LIN0702 Inglés I": ["LIN0301 Inglés Básico"],
+      "FPC1702 Taller de Comunicación Educativa": ["FFE0301 Español", "FPP1002 Pedagogía"],
       "LIN1103 Inglés II": ["LIN0702 Inglés I"],
       "FPF2002 Filosofía Educativa": ["FFF1601 Filosofía"],
       "LIN1504 Inglés III": ["LIN1103 Inglés II"],
@@ -243,7 +151,8 @@
       "LIM4100 Didáctica de la Gramática": ["LIN3108 Teorías y Métodos de TESOL"],
       "LIN4200 Sociolingüística": ["LIN2807 Fundamentos de Lingüística Aplicada"],
       "LIN4300 Psicolingüística": ["LIN2807 Fundamentos de Lingüística Aplicada"],
-      "LIN4501 Inglés para Propósitos Específicos": ["LIN3108 Teorías y Métodos de TESOL"]
+      "LIN4501 Inglés para Propósitos Específicos": ["LIN3108 Teorías y Métodos de TESOL"],
+      "PPI4802 Seminario de Desarrollo Profesional": ["PPI4601 Práctica Profesional II en Inglés"]
     };
 
     const completed = JSON.parse(localStorage.getItem("completedCourses") || "[]");
@@ -266,6 +175,10 @@
           courseDiv.className = "course";
           courseDiv.textContent = course;
 
+          if (course.includes("Taller") || course.includes("Electiva")) {
+            courseDiv.classList.add("workshop");
+          }
+
           if (completed.includes(course)) {
             courseDiv.classList.add("completed");
           } else if (arePrerequisitesMet(course)) {
@@ -282,7 +195,7 @@
 
     function arePrerequisitesMet(course) {
       if (!prerequisites[course]) return false;
-      return prerequisites[course].every(prereq => completed.includes(prereq));
+      return prerequisites[course].every(p => completed.includes(p));
     }
 
     function toggleCourse(course) {
@@ -290,11 +203,9 @@
       const unlocked = [];
 
       if (idx > -1) {
-        completed.splice(idx, 1); // Uncheck
+        completed.splice(idx, 1);
       } else {
         completed.push(course);
-
-        // Check which courses are now unlocked
         for (const [target, prereqs] of Object.entries(prerequisites)) {
           if (!completed.includes(target)) {
             const wasLocked = !prereqs.every(p => completed.includes(p));
