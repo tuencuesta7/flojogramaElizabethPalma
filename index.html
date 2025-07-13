@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licenciatura en la Enseñanza del Inglés</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe0f0, #e0f7fa);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #880e4f;
+      text-shadow: 1px 1px 2px #fff;
+      font-size: 24px;
+    }
+
+    #semesters-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .semester {
+      flex: 0 0 auto;
+      width: 220px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      padding: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .semester:hover {
+      transform: translateY(-5px);
+    }
+
+    .semester h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 10px 10px 0 0;
+      font-size: 16px;
+    }
+
+    .course {
+      display: block;
+      margin: 6px 0;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background-color: #fce4ec;
+      cursor: pointer;
+      font-size: 14px;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .course.completed {
+      text-decoration: line-through;
+      background-color: #e1bee7;
+      color: #888;
+    }
+
+    .course.highlight {
+      border: 2px solid #ec407a;
+      background-color: #f8bbd0;
+    }
+
+    @media (max-width: 768px) {
+      .semester {
+        width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Flujograma - Licenciatura en la Enseñanza del Inglés</h1>
+  <div id="semesters-container"></div>
+
+  <script>
+    const semesters = [
+      { name: "1° PERÍODO", color: "#f48fb1", courses: ["FFP-1002 Pedagogía", "FFE-0301 Español", "LIN-0001 Inglés Básico", "FRM-1301 Matemática"] },
+      { name: "2° PERÍODO", color: "#ce93d8", courses: ["FAI902 Psicología del Aprendizaje", "FPC-1702 Taller de Com. Educativa", "LIN-0702 Inglés I"] },
+      { name: "3° PERÍODO", color: "#81d4fa", courses: ["FRF-1601 Filosofía Educativa", "FRM-1801 Historia de Honduras", "LIN-1103 Inglés II"] },
+      { name: "4° PERÍODO", color: "#a5d6a7", courses: ["FFP-2002 Filosofía Educativa", "FPG-2602 Gestión Educativa", "LIN-1504 Inglés III"] },
+      { name: "5° PERÍODO", color: "#ffab91", courses: ["FDL-2105 Diseño y Desarrollo Curricular del Inglés", "LIN-1805 Fund. Educ. Pre-básica y Básica", "LIN-1905 Inglés IV", "LIN-1604 Taller de Gramática"] },
+      { name: "6° PERÍODO", color: "#ffcc80", courses: ["FFS-1501 Sociología", "LIN-2206 Introducción a la Educ. Literaria U.V.", "FPM-2202 Metodología Investigación Cuantitativa", "LIN-2005 Taller de Lectura y Escritura"] },
+      { name: "7° PERÍODO", color: "#e6ee9c", courses: ["FDI-2607 Didáctica del Inglés", "FDI-3207 Evaluación de los Aprendizajes en Inglés", "LIN-2807 Lingüística Aplicada", "LIN-2506 Taller de Oratoria y Conversación"] },
+      { name: "8° PERÍODO", color: "#c5e1a5", courses: ["LIN-3108 Teoría y Métodos de TESOL", "LIN-3208 Morfosintaxis del Inglés", "FPM-2402-14 Metodología Investigación Cualitativa", "LIN-2907 Literatura Universal"] },
+      { name: "9° PERÍODO", color: "#b2dfdb", courses: ["LIN-3609 Fonética y Fonología del Inglés", "LIN-3809 Taller de Inv. en TESOL", "LIN-3909 Didáctica de Compr. y Exp. Oral", "LIN-3508 Diseño y Selección Material Didáctico"] },
+      { name: "10° PERÍODO", color: "#80cbc4", courses: ["LIN-4100 Didáctica de Gramática", "LIN-4200 Sociolingüística", "LIN-4300 Sociolingüística II", "LIN-4009 Didáctica de Compr. y Exp. Escrita"] },
+      { name: "11° PERÍODO", color: "#9fa8da", courses: ["LIN-4501 Inglés Propósito Específico", "PPI-3709 Práctica Profesional I en Inglés"] },
+      { name: "12° PERÍODO", color: "#ce93d8", courses: ["PPI-4601 Práctica Profesional II en Inglés", "PPI-4802 Seminario de Investigación"] }
+    ];
+
+    const prerequisites = {
+      "LIN-0702 Inglés I": ["LIN-0001 Inglés Básico"],
+      "LIN-1103 Inglés II": ["LIN-0702 Inglés I"],
+      "LIN-1504 Inglés III": ["LIN-1103 Inglés II"],
+      "LIN-1905 Inglés IV": ["LIN-1504 Inglés III"],
+      "LIN-2206 Introducción a la Educ. Literaria U.V.": ["LIN-1805 Fund. Educ. Pre-básica y Básica"],
+      "FDI-2607 Didáctica del Inglés": ["FDL-2105 Diseño y Desarrollo Curricular del Inglés"],
+      "LIN-3108 Teoría y Métodos de TESOL": ["FDI-2607 Didáctica del Inglés"],
+      "LIN-3609 Fonética y Fonología del Inglés": ["LIN-3108 Teoría y Métodos de TESOL"],
+      "LIN-4100 Didáctica de Gramática": ["LIN-3609 Fonética y Fonología del Inglés"],
+      "LIN-4200 Sociolingüística": ["LIN-4100 Didáctica de Gramática"],
+      "PPI-3709 Práctica Profesional I en Inglés": ["LIN-4200 Sociolingüística"],
+      "PPI-4601 Práctica Profesional II en Inglés": ["PPI-3709 Práctica Profesional I en Inglés"],
+      "PPI-4802 Seminario de Investigación": ["PPI-4601 Práctica Profesional II en Inglés"]
+    };
+
+    const completed = JSON.parse(localStorage.getItem("completedCourses") || "[]");
+
+    function renderSemesters() {
+      const container = document.getElementById("semesters-container");
+      container.innerHTML = "";
+
+      semesters.forEach((sem) => {
+        const semDiv = document.createElement("div");
+        semDiv.className = "semester";
+
+        const title = document.createElement("h2");
+        title.textContent = sem.name;
+        title.style.backgroundColor = sem.color;
+        semDiv.appendChild(title);
+
+        sem.courses.forEach(course => {
+          const courseDiv = document.createElement("div");
+          courseDiv.className = "course";
+          courseDiv.textContent = course;
+
+          if (completed.includes(course)) {
+            courseDiv.classList.add("completed");
+          } else if (arePrerequisitesMet(course)) {
+            courseDiv.classList.add("highlight");
+          }
+
+          courseDiv.addEventListener("click", () => toggleCourse(course));
+          semDiv.appendChild(courseDiv);
+        });
+
+        container.appendChild(semDiv);
+      });
+    }
+
+    function arePrerequisitesMet(course) {
+      if (!prerequisites[course]) return false;
+      return prerequisites[course].every(prereq => completed.includes(prereq));
+    }
+
+    function toggleCourse(course) {
+      const idx = completed.indexOf(course);
+      if (idx > -1) {
+        completed.splice(idx, 1);
+      } else {
+        completed.push(course);
+      }
+      localStorage.setItem("completedCourses", JSON.stringify(completed));
+      renderSemesters();
+    }
+
+    renderSemesters();
+  </script>
+</body>
+</html>
